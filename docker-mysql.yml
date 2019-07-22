@@ -1,0 +1,56 @@
+version: "3.2"
+
+services:
+  mysql:
+    image: mysql:5.7.15
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: docker2123
+      MYSQL_DATABASE: calendar
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker2123
+    # command: [
+    #         '--character-set-server=utf8mb4',
+    #         '--collation-server=utf8mb4_unicode_ci'
+    # ]
+    volumes:
+      - ./etc/mysql:/etc/mysql:rw
+      - /var/lib/mysql:/var/lib/mysql:rw
+    networks:
+      - default
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.role == manager
+    # deploy:
+    #   mode: replicated
+    #   replicas: 1
+    #   placement:
+    #     constraints:
+    #       - node.role == manager  # 这里不能使用master 只能使用manager
+    #   restart_policy:
+    #     condition: on-failure
+    #     delay: 5s
+    #     max_attempts: 1
+    #   update_config:
+    #     parallelism: 1
+    #     delay: 10s
+
+# volumes:
+#   volume_mysql:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: /Users/nut/Dropbox/dev/docker/calendar/mysql/mac
+
+networks:
+  default:
+    external:
+      name: nginx
+
+
+
+
