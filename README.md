@@ -3,10 +3,11 @@ Work in Docker Swarm environment;
 author: 董方方
 
 ## Struct
-etc
+- etc
   - mysql
     - 配置信息（保证了mysql的utf8编码 及tcp连接模式）
-mysql
+
+- mysql
   - mysql数据库文件
 
 ## 1. 部署Docker Stack
